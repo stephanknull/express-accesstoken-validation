@@ -1,0 +1,42 @@
+{
+  "name": "express-accesstoken-validation",
+  "version": "0.1.0",
+  "description": "ExpressJS middleware for remote access token validation",
+  "main": "index.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PDMLab/express-accesstoken-validation.git"
+  },
+  "keywords": [
+    "express",
+    "expressjs",
+    "accesstoken",
+    "token",
+    "validation",
+    "oauth2-server",
+    "oauth2",
+    "client",
+    "bearer"
+  ],
+  "author": "Alexander Zeitler <alexander.zeitler@pdmlab.com>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/PDMLab/express-accesstoken-validation/issues"
+  },
+  "homepage": "https://github.com/PDMLab/express-accesstoken-validation#readme",
+  "devDependencies": {
+    "express": "^4.13.4",
+    "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "lodash": "^4.6.1",
+    "request": "^2.69.0",
+    "url-join": "0.0.1"
+  }
+}
