@@ -21,7 +21,7 @@ function authorization(options) {
     if (_.some(options.unprotected, (route) => {
         return route === req.url
       })) {
-      next();
+      return next();
     }
 
     if (req.headers.authorization) {
