@@ -19,7 +19,7 @@ function authorization(options) {
 
   return function (req, res, next) {
     if (_.some(options.unprotected, (route) => {
-        return route === req.url
+        return route === req._parsedUrl.pathname
       })) {
       return next();
     }

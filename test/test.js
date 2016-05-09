@@ -79,7 +79,33 @@ describe('Access Token validation', function () {
         unprotected: ['/public', '/public/api']
       })({
         headers: {},
-        url: '/public'
+        url: '/public',
+        _parsedUrl:  { pathname: '/public' }
+      }, {
+        status: function (number) {
+          return {
+            send: function () {
+              statusCode = number;
+            }
+          }
+        }
+      }, function (err) {
+        assert.equal(err, null);
+        done();
+      });
+    });
+  });
+
+  describe('When calling an unprotected URI with query params', function () {
+    it('should call next middleware (=allow access)', function (done) {
+      bearerTokenValidation({
+        validationUri: 'http://localhost:3000/oauth/tokenvalidation',
+        tokenParam: 'token',
+        unprotected: ['/public', '/public/api']
+      })({
+        headers: {},
+        url: '/public?id=1',
+        _parsedUrl:  { pathname: '/public' }
       }, {
         status: function (number) {
           return {
