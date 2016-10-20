@@ -1,6 +1,6 @@
 {
   "name": "express-accesstoken-validation",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "ExpressJS middleware for remote access token validation",
   "main": "index.js",
   "engines": {
