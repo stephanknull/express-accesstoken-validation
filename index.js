@@ -29,6 +29,10 @@ function authorization(options) {
       let tokenParam = `?${options.tokenParam}=${bearerToken}`;
       var uri = urlJoin(options.validationUri, tokenParam);
       request(uri, function (err, validationResponse) {
+        if (err) {
+          // failed to get validation response
+          return res.status(500).send();
+        }
         if (validationResponse.statusCode === 200) {
           return next();
         }
