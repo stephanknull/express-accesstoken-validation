@@ -121,6 +121,56 @@ describe('Access Token validation', function () {
     });
   });
 
+  describe('When calling an unprotected URI with url-params', function () {
+    it('should call next middleware (=allow access)', function (done) {
+      bearerTokenValidation({
+        validationUri: 'http://localhost:3000/oauth/tokenvalidation',
+        tokenParam: 'token',
+        unprotected: ['/public/:id', '/public/api']
+      })({
+        headers: {},
+        url: '/public/0815',
+        _parsedUrl:  { pathname: '/public/0815' }
+      }, {
+        status: function (number) {
+          return {
+            send: function () {
+              statusCode = number;
+            }
+          }
+        }
+      }, function (err) {
+        assert.equal(err, null);
+        done();
+      });
+    });
+  });
+
+  describe('When calling an unprotected URI with query params & url-params', function () {
+    it('should call next middleware (=allow access)', function (done) {
+      bearerTokenValidation({
+        validationUri: 'http://localhost:3000/oauth/tokenvalidation',
+        tokenParam: 'token',
+        unprotected: ['/public/:id', '/public/api']
+      })({
+        headers: {},
+        url: '/public/0815?id=1',
+        _parsedUrl:  { pathname: '/public/0815' }
+      }, {
+        status: function (number) {
+          return {
+            send: function () {
+              statusCode = number;
+            }
+          }
+        }
+      }, function (err) {
+        assert.equal(err, null);
+        done();
+      });
+    });
+  });
+
   describe('When validating an invalid token', function () {
     it('should return status code 401 ', function (done) {
       bearerTokenValidation({

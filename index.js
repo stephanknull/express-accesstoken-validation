@@ -2,6 +2,7 @@
 const _ = require('lodash');
 const request = require('request');
 const urlJoin = require('url-join');
+const urlPattern = require('url-pattern');
 
 
 function authorization(options) {
@@ -19,7 +20,7 @@ function authorization(options) {
 
   return function (req, res, next) {
     if (_.some(options.unprotected, (route) => {
-        return route === req._parsedUrl.pathname
+        return new urlPattern(route).match(req._parsedUrl.pathname);
       })) {
       return next();
     }
