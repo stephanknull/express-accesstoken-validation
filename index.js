@@ -26,7 +26,9 @@ function authorization(options) {
     }
 
     if (req.headers.authorization) {
-      let bearerToken = req.headers.authorization.substr(7);
+      const tokens = req.headers.authorization.split(', ');
+      const bearerTokenHeader = _.find(tokens, token => token.toLowerCase().startsWith('bearer'));
+      let bearerToken = bearerTokenHeader.substr(7);
       let tokenParam = `?${options.tokenParam}=${bearerToken}`;
       var uri = urlJoin(options.validationUri, tokenParam);
       request(uri, function (err, validationResponse) {
