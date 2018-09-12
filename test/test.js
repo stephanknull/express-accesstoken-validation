@@ -193,6 +193,31 @@ describe('Access Token validation', function () {
     });
   });
 
+  describe('With multiple tokens', function () {
+    it('should select the correct and call next middleware (=allow access)', function (done) {
+      bearerTokenValidation({
+        validationUri: 'http://localhost:3000/oauth/tokenvalidation',
+        tokenParam: 'token'
+      })({
+        headers: {
+          'authorization': 'bearer token, policy policytoken'
+        },
+        url: '/protected'
+      }, {
+        status: function (number) {
+          return {
+            send: function () {
+              statusCode = number;
+            }
+          }
+        }
+      }, function (err) {
+        assert.equal(err, null);
+        done();
+      });
+    });
+  });
+
   describe('When authorization header is missing', function () {
     it('should return status code 401', function (done) {
       bearerTokenValidation({
